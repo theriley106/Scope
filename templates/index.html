@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <title>Scope Prototype</title>
+
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+    }
+    #main-content {
+      min-height: calc(100vh - 70px);
+    }
+    .search-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+    .search-bar {
+      width: 80%;
+    }
+    footer {
+      height: 70px;
+      background-color: #f8f9fa;
+      border-top: 1px solid #eaeaea;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .autocomplete-results {
+      position: absolute;
+      top: 100%;
+      left: 10%;
+      width: 80%;
+      z-index: 1000;
+      background: white;
+      border: 1px solid #ddd;
+      border-top: none;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .result-item {
+      display: flex;
+      align-items: center;
+      padding: 5px 10px;
+      border-bottom: 1px solid #eee;
+    }
+    .result-item img {
+      height: 30px;
+      width: 30px;
+      margin-right: 10px;
+      object-fit: cover;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <div id="main-content" class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center mt-3">
+        <h1>Scope Prototype</h1>
+      </div>
+    </div>
+    <div class="search-container">
+        <div class="search-bar" style="position: relative;"> <!-- This needs to be relatively positioned -->
+          <input type="text" id="autocomplete" class="form-control" placeholder="Search..." oninput="handleAutocomplete(this.value)">
+          <div id="autocomplete-results" class="autocomplete-results"></div>
+        </div>
+      </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <span>Jay Patel (jrp2212)</span> | 
+      <span>Austin Liao (al3979)</span> | 
+      <span>Teodora Sutilovic (ts3356)</span> | 
+      <span>Christopher Lambert (cl3991)</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script>
+    function handleAutocomplete(searchTerm) {
+      if (searchTerm.length === 0) {
+        $('#autocomplete-results').empty();
+        return;
+      }
+      
+      $.ajax({
+        url: '/autocomplete',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ term: searchTerm }),
+        success: function(response) {
+          $('#autocomplete-results').empty();
+          
+          response.results.forEach(function(item) {
+            $('#autocomplete-results').append(
+              `<div class="result-item">
+                <img src="${item.image}" alt="result image">
+                <span>${item.content}</span>
+              </div>`
+            );
+          });
+        },
+        error: function(xhr, status, error) {
+          console.error("Autocomplete error:", status, error);
+          $('#autocomplete-results').empty();
+        }
+      });
+    }
+
+    $(document).on('click', function (e) {
+      if (!$(e.target).closest('#autocomplete').length) {
+        $('#autocomplete-results').empty();
+      }
+    });
+  </script>
+</body>
+</html>
