@@ -1,0 +1,89 @@
+
+ACO algorithms for the Hydrophobic Polar Protein Folding Problem version 3 (ACO-HPPFP-3)
+===============================================================
+PARAMETERS:
+
+The following parameters NEED to be specified (no default values):
+
+parameter            description
+--------------------------------
+-seq                 hp sequence to be folded in lower case letters (e.g. hhhhpppphhh)
+-eng                 optimal energy (specify as a positive value) known or approximated (if not known use large enough number) 
+-file                output file
+
+Optional parameters that have default values (same default values for 2D and 3D):
+
+parameter           default value   description
+-------------------------------------------------------------
+-runs               10              number of independent runs of an algorithm
+-tries              1000000         cut-off number for number of iterations (construction-local search-pheromone update) in each run
+-time               1000000         cut-off CPU time [sec] per run
+-ants               100             number of ants in the colony
+-noImprLS           10000           length of local search - number of non improving steps tolerated in each call to local search
+-alpha              1               weight for the pheromone information
+-beta               2               weight for the heuristic information
+-rho                0.8             pheromone persistence
+-noise              0.05            theta (pheromone noise)
+-elitist_ants       0.01            fraction of elitist ants (updating pheromone matrix, 0 <= elitist_ants <= 1)
+-fractLSants        0.5             fraction of ants chosen to perform local search (0 <= fractLSants <= 1)
+-probPrev           0.5             probability of keeping previous direction (in long-range move)
+
+=================================================================
+EXAMPLES OF USAGE:
+
+folding in 2D:
+
+./antsystem2D -seq pphpphhpphhppppphhhhhhhhhhpppppphhpphhpphpphhhhh -eng 23 -file seq1_3D -noImprLS 1000 -noise 0.05 -tries 1000000 -runs 3 -ants 100 -alpha 1 -beta 2 -rho 0.8 -elitist_ants 0.01 -fractLSants 0.5 -probPrev 0.5 -time 172800
+
+folding in 3D:
+
+./antsystem3D -seq hphhpphhhhphhhpphhpphphhhphphhpphhppphpppppppphh -eng 32 -file seq1_2D -noImprLS 10000 -noise 0.05 -tries 1000000 -runs 3 -ants 100 -alpha 1 -beta 2 -rho 0.8 -elitist_ants 0.01 -fractLSants 0.5 -probPrev 0.5 -time 172800
+
+For more detailed information about the parameter settings both in 2D and 3D
+check the paper: An ant colony optimisation algorithm for the 2D and 3D hydrophobic polar protein folding problem. Alena Shmygelska and Holger H Hoos,BMC Bioinformatics 2005, 6:30 (14 Feb 2005).
+==================================================================
+OUTPUT:
+
+Console output produced:
+
+ACO algorithms for the Hydrophobic Polar Protein Folding Problem version 3 (ACO-HPPFP-3)
+run 0
+run 1
+run 2
+...
+
+[Algorithm display progress in terms of number of independent runs completed]
+==================================================================
+File output produced:
+
+ACO algorithms for the Hydrophobic Polar Protein Folding Problem version 3 (ACO-HPPFP-3)
+
+
+Parameter-settings: 
+
+max runs = 3
+max iterations = 1000000
+cut-off time = 172800 CPU sec
+optimal energy (known or approximated) = -32
+number of ants = 100
+length of local search - noImpr steps = 10000
+alpha (pheromone weight) =  1
+beta (heuristic info weight) = 2
+rho (pheromone persistence) = 0.8
+theta (pheromone noise) = 0.05
+percent of elitist ants (updating pheromone matrix) = 1 %
+percent of ants chosen to perform local search = 50 %
+probability of keeping previous direction (in long-range move) = 0.5
+HP sequence: hphhpphhhhphhhpphhpphphhhphphhpphhppphpppppppphh
+sequence size = 48
+
+==============================================
+
+run = 0; iteration = 1; CPU time = 0 sec; Lowest energy = -11; Conformation = udlrrduurrudrddudrudllurdldggrluruslsdlruldsduul;
+
+run = 0; iteration = 1; CPU time = 0 sec; Lowest energy = -13; Conformation = rudrssdruddslsllurdduurrssggruurrulsdrsdslldrddu;
+
+...
+
+[Parameter settings are outputed; in each run for each improving energy value - Lowest energy we output: CPU time [sec] required to find this solution quality, iteration number in which this solution quality was found, and the actual conformation of a protein in terms of relative directions [s-straight; l-left; r-right; u-up; d-down; g-grounded amino acid (there is a pair of amino acids that serve as the point of reference)].
+=====================================================================

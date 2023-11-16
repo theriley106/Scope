@@ -106,10 +106,10 @@
           
           response.results.forEach(function(item) {
             $('#autocomplete-results').append(
-              `<div class="result-item">
+              `<a href="${item.link}"><div class="result-item">
                 <img src="${item.image}" alt="result image">
                 <span>${item.content}</span>
-              </div>`
+              </div></a>`
             );
           });
         },

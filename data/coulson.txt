@@ -1,0 +1,534 @@
+PROTEIN STRUCTURE TUTORIAL
+
+The following tutorial was contributed by Andrew Coulson, Univ
+Edinburgh UK (a.coulson@ed.ac.uk).  It teaches the student to
+recognize the main elements of protein secondary structure, and the
+main structural classes of globular proteins.  The tour begins with an
+examination of RNAse, continues with two alpha proteins (cytochrome
+B562 and myoglobin), two beta proteins (crystallin and retinol-binding
+protein), and two alpha/beta proteins (triosephosphate isomerase and
+flavodoxin).  It ends with an open-ended exploration of a DNA-binding
+protein.
+
+Practical 6
+
+Protein Modelling
+
+1. Objectives 
+
+The object of this exercise is to allow you to become familiar with
+the main architectural  features of several classes of globular
+protein, by studying computer-generated interactive  drawings of
+models of the proteins.  We hope that this will make the descriptions
+of  protein structures in course lectures and in textbooks such as
+Branden and Tooze more  comprehensible. After completing and writing
+up the exercise, you should be able to
+
+1. 	Use a molecular-graphics system to analyse the architecture of proteins.
+2. 	Recognize the main elements of secondary structure within a protein fold.
+3. 	Explain how secondary structural patterns have been used to
+classify protein  structures.
+4. 	Describe the main structural classes of globular proteins.
+
+The main part of the practical is a 'guided tour' of seven proteins,
+each typical of its class.  In the course of this tour you should also
+become familiar with the features of the  graphics program 'RasMol'
+which are useful for highlighting features of the structures.   The
+final part of the practical is an open-ended exercise in which you
+make use of these  tools to describe the structure and mode of binding
+of a DNA-binding protein to its target  sequence.  
+
+The microcomputer lab where this practical is being held is generally
+available for  individual use, and  you are also encouraged to make
+use of the lab facilities in your own  time to look at these
+molecules, or any others in which you may be interested.  Please ask 
+a demonstrator if you want to work on any other protein, and we will
+get the co-ordinates  of any available solved structure.
+
+You should take notes of what you observe, with sketches and diagrams,
+if you find these  useful; it is also possible to get monochrome
+prints from the graphics screen (ask a  demonstrator). At various
+points in these notes there are specific questions for you to  answer.
+If you choose to present your write-up of this practical for
+assessment, there  should be a brief clear account of what you have
+seen, and answers to the specific  questions.  You will find
+discussion of some aspects of the structures of all these proteins  in
+Branden and Tooze, Introduction to Protein Structure.
+
+
+2. Molecular Graphics Program, RasMol.
+
+RasMol takes as input a file containing the 3-dimensional coordinates
+of the atoms in a  molecular structure; the program draws a
+representation of various types of model.
+
+The most realistic model represents each atom as a solid sphere
+(hydrogen atoms are  usually omitted, and the size of non-hydrogen
+atoms is therefore exaggerated a little so  that the space-filling
+properties of groups and molecules are roughly correct). 
+	
+'Ball-and-stick' models allow you to see through the structure; atoms
+are represented as  small spheres, and the bonds joining them as rods.
+In the 'wireframe' model the atoms are  shrunk to the points where the
+bonds (represented as wires) meet.  In the 'backbone'  model all the
+side-chains are removed, and the folding of the polypeptide or nucleic
+acid  chain is shown by straight rods joining the positions of the
+centres of the a-carbon  or  phosphate atoms. The simplest model is a
+smooth ribbon drawn through the peptide units;  this may be either
+solid ('Ribbons') or made of parallel thin wires ('Strands')
+
+The model can be rotated about the x, y and z axes interactively so
+that all parts of the  molecule can be studied. The molecule can be
+made smaller or larger  and in addition it is  possible to expand the
+viewing window up to the full size of the screen  -  but the larger 
+the picture, and the more elaborate the model, the longer it takes the
+computer to  calculate the appearance of the drawing. A good technique
+is to adjust the point of view  and other features of the drawing
+using a small window and a backbone model, so that,  for example,
+changes in the viewing position are made quickly, and then to make the 
+model more complicated and the window larger so that the fine detail
+can be seen.
+
+Several colouring schemes are available; the four most useful are
+'CPK' (carbon atoms  pale grey; oxygen red, nitrogen blue and sulphur
+yellow), 'group' colouring (the chain is  coloured with the colour of
+the rainbow, from blue at the N-terminus to red at the C- terminus;
+this is useful for following the fold from one end of the chain to the
+other), and  'shapely' and 'amino' colours.  In the former scheme, the
+backbone is pale grey, and the  side-chain atoms are all given a
+colour which depends on the size and the polarity of the  side-chain. 
+Oxygen-containing side-chains (acids, amides,  and the
+hydroxy-aminoacids  Ser and Thr) are various shades of red, and basic
+side chains (Arg, Lys, His) blue.  Hydrophobic aminoacids are mostly
+grey, but Ile is dark green and Val a pale magenta.  The
+sulphur-containing amino-acids (Cys, Met) have muddy yellow colours,
+Trp is  yellow and Gly, white.  The full list is:
+	
+	A  (ala) pale green	   	M (met) plale brown	
+	C  (cys) sandy yellow	N  (asn) salmon
+	D  (asp) dark magenta	P  (pro) grey
+	E  (glu) red			Q  (gln) flesh pink
+	F  (phe) grey			R  (arg) navy blue
+	G  (gly) white			S  (ser) tomato
+	H  (his) slate blue		T  (thr) orange red
+	I  (ile) dark green		V  (val) pale magenta
+	K  (lys) royal blue		W (trp) yellow
+	L  (leu) grey			Y  (tyr) clay grey	
+
+The 'amino' scheme is similar but simpler: E and D are red; K and R
+blue; C and M  yellow; H unfaded blue jeans; Q and N a bright
+green/blue; S and T orange; P flesh; I,L  and V dark green; W dark
+purple; Y and F a lighter purple; G and A are off-white and  light
+gray respectively.
+
+The properties of the drawing are changed either by picking items from
+menus with the  mouse, or by typing commands into a second window.
+Clicking with the mouse on any  atom will cause the atom to be
+identified in the second window. Drawings can be made  using selected
+parts of the molecule only; and it is often useful, for example, to
+draw  some atoms or groups with the space-filling representation and
+others as wireframe or  backbone.  H-bonds (involving the backbone of
+proteins or the bases of nucleic acids)  and disulphide bonds can also
+be drawn, to help show secondary structure. The program  knows how to
+identify secondary structure, and so these too can be isolated and
+drawn  differently. You will be provided with a copy of the user
+manual for the program, which  describes how all these features can be
+used, and all this information is also available  using the on-screen
+'Help' facility; however, it is often quicker to learn the techniques
+by  demonstration than by reading about them, and the demonstrators
+will try and move  round quickly to do so!
+
+
+3. Use of RasMol: Ribonuclease.
+
+The first molecule to look at is the enzyme ribonuclease, which
+catalyses the hydrolysis  of RNA.  We shall see how to use some of the
+features of RasMol, and in particular how  simplifying the structure
+makes the architecture of the fold more comprehensible.
+
+Start RasMol by clicking with the right button on the background; drag
+down and to the  right to highlight 'Applications', 'Molecular
+graphics' and finally 'rasmol'.  In the RasMol  window, click on
+'Load'; in response to the filename prompt in the interaction window, 
+type
+	5RSA.pdb  <enter> 	
+Click on 'Display' and then 'Spacefill'.
+Open the 'Options' menu, and highlight 'Hydrogens'; the effect should
+be to remove the  hydrogen atoms from the model. Note that some water
+molecules are shown; these are  molecules which are fixed in the
+crystal stucture and therefore appear in the image.  Remove them by
+giving the commands:
+
+      	select DOD
+    	spacefill off
+     select amino
+(Can you suggest why you select DOD, rather than HOH?)
+
+Note the prominent cleft in the surface, and the bound phosphate
+(orange and red) ion  near the middle of the picture. Just to the
+right you should see the 5-membered ring of a  histidine sidechain.
+Click on one of these atoms to confirm that this is His-119. This is 
+one of the two His's in the enzyme active site. The other is concealed
+by the phosphate ion; remove the latter:
+
+    select [PO4]
+    spacefill off
+    select amino
+
+Now find the other histidine, His-12. To what extent is each of these
+side-chains buried,  or exposed to solvent?
+
+Change the view of the molecule by giving the following three commands
+in the  interaction window (note that the x-axis is across the viewing
+window, the y-axis vertical  and the z-axis perpendicular to the
+screen).  Keep your eye on His 119 during these  operations, and if
+you lose it, go back by changing the sign of the angle of rotation
+until  you find it again...
+	
+	rotate z 110
+	rotate x -15
+	rotate z 15
+
+Note that the cleft is now vertical, and that sulphur atoms are
+visible to the right.
+
+Click 'Options' and then 'Shadows'  -  this gives a better impression
+of the 3-D structure,  but slows down the drawing. What shape is the
+cleft? Click 'Options' then  'Shadows' to  turn off this feature.
+
+Give the command
+	Colour atom amino <enter>
+in the interaction window. Are there any other potentially chemically
+active side chains  near the active site?  List some of the residues
+which line the cleft.  Looking overall at the  surface of the
+molecule, do you expect ribonuclease to be an acidic (pI < 7) or basic
+(pI >  7) molecule?
+
+You can cut sections through the molecule by giving commands such as 
+	slab 70
+in the interactive window; this will cut away the front
+30% (= 100% - 70%) of the  molecule.  Give the commands
+
+	slab 20
+	slab 30
+	slab 40
+	slab 50
+	.....  etc  .....
+
+to cut a series of sections from front to back. As you work you way
+forward, sulphur- containing residues (yellow) appear. Some of these
+are methionines, but there are also 8  buried cysteins, linked by 4
+disulphide bridges. Identify these cysteines. Finally, give the 
+command
+	slab off
+to turn off this feature.
+
+Click 'Colours', then 'Group' to see the run of the polypeptide chain
+from N-terminus  (blue) to C-terminus (green).
+
+Now simplify the representation by:
+Click on 'Display', then 'Ball-and-Stick'
+Click on 'Display' then 'Wireframe'  
+Click on 'Display' then 'Backbone'
+Click on 'Display' then 'Ribbons'
+
+Use the scroll-bars and mouse to rotate the molecule and list the 
+secondary structure  elements in order down the chain. Draw the active
+site histidines again:
+
+	select (his12 or his119) and sidechain
+	wireframe 200
+	colour atoms red
+
+Which elements of the secondary structure support His-12 and His-119? 
+What supports  the rest of the active site cleft?
+
+Finally, give the command 
+	zap
+to remove this molecule.
+
+
+4. Helix proteins: b562 and myoglobin
+
+Next we look at two alpha proteins, in which the main elements of
+secondary structure present are a-helices. The main purpose is to
+study two ways in which helices are assembled to make a complete
+protein, but we also consider other aspects of the proteins' 
+structure and function.
+
+The first of these proteins is cytochrome b562, a haem-containing
+electron transport  protein. Load the file 
+	256B.pdb.
+Click on 'Display' then 'Backbone'
+Click on 'Colours', then 'Group'
+
+Note that there are two molecules in this structure; isolate one of
+them with the  commands:
+
+	select *A
+	save temp.pdb
+	zap
+	load temp.pdb
+Click on 'Display' then 'Backbone'
+Click on 'Colours', then 'Group'
+
+Use the scroll bars to rotate the molecule; notice that it consists of
+a bundle of 4 helices.  Sketch their general arrangement.  Note that
+the inter-helix loops are shorter at one end of  the molecule than the
+other, and that this gives it an overall conical shape (draw spheres 
+to check).  The haem is bound near the wider end of the cone. Notice
+how the helices are  packed against one another.  Add H-bonds with the
+commands
+
+	colour hbonds type
+	hbonds 50
+	set hbonds backbone
+
+Give the command
+	backbone off
+	hbonds off
+in the interaction window. Give the command
+	select resno > 65
+in the interaction window to cut off the N-terminal part.
+
+Click 'Display' then 'Backbone'; note the N-to-C direction.
+Click 'Colours' then 'Shapely'
+Click 'Display' then 'Spacefill'
+The command
+	set background white
+may make things easier to see.
+Give the command
+	select all
+in the interaction window, then
+	backbone 100
+
+to draw the rest of the backbone.  Rotate the molecule to see which
+residues are in contact  with solvent, and which form a hydrophobic
+patch between the helices; identify the  residues in the interior line
+of hydrophobics.
+
+Go back to the backbone drawing:
+Click 'Display' then 'Backbone'
+Click 'Colours' then 'Group'
+Note and sketch the angles between the axes of the pairs of helices.
+Give the command 
+	zap.
+
+The second a-helix protein is myoglobin, the haem-containing oxygen
+binding protein of  peripheral tissue.  The structure is very similar
+to those of the subunits of haemoglobin.  Re-start RasMol with the
+file 
+
+	1MBN.pdb
+
+Note from the wireframe drawing that the haem group is visible in the
+bottom centre of  the drawing.
+
+Rotate the molecule so that the haem is edgewise on and just above the
+middle. Draw the  molecule in amino colours and spacefilling.
+
+Click 'Options' then 'Het Atoms'. Note that the haem-binding pocket is
+now visible.
+
+Click 'Options' then 'Shadows'.  Identify the residues in contact with
+the haem.
+
+Draw the backbone in 'group' colours.  Count the helices; which
+helices support the  haem-binding pocket?  Turn the backbone off and
+give the commands
+
+	select resno>57 and resno<79
+
+in the interaction window to isolate part of the structure.  Display
+it as backbone and then  as spheres, in shapely colours.  Give the
+commands:
+
+	select all
+	backbone on
+
+in the interaction window. Note the complex 'lumpy' surface of the
+helices and the  hydrophobic residues at helix crossing points.
+Identify these, and sketch the crossing  angles of the helices in
+contact.  Go back to a complete backbone drawing and sketch the 
+molecule as a 'bent sausage'.  Identify the helices by letters A,B,C
+etc from the N- terminus.  Finally, give the command:
+
+	zap
+
+
+5. Beta proteins:  crystallin and retinol-binding protein
+
+The next two proteins have anti-parallel b-sheets as their main
+secondary structural  elements.  The first is an eye-lens protein
+called g-crystallin.  
+
+Start RasMol with the file 	
+
+	4GCR.pdb
+
+Display the molecule as a group-coloured backbone and rotate it to see
+that it is formed  from two distinct domains. Isolate the second half
+of the chain by giving the following  commands in the interaction
+window:
+
+	wireframe off
+	select resno>82
+	backbone 100
+	select selected and sheet
+	ribbons on
+	colour group
+	centre val126.N
+
+Rotate the molecule to see the secondary structure elements are linked
+together; a good  view is looking up from the bottom of the 'bell'.
+Describe the fold; sketch a diagram  showing the orientation and order
+of the b-strands. When writing up, compare this  diagram with that on
+p.68 of Branden and Tooze; confirm that the domain contains two  Greek
+key motifs.
+
+'Buried' defines a class of aminoacid - those that are usually buried,
+out of contact with  the solvent. Give the commands:
+
+	select buried 
+	resno>82
+
+Click 'Display' then 'Spacefill'.  Now give the commands:
+
+	select resno>82
+	backbone 100
+
+Note that the b-sheet forms a hydrophobic sandwich.  Finally display
+the second half of  the molecule and confirm that the number and order
+of the strands (i.e. the topology) of  this domain is the same as the
+first.
+
+The second b-sheet protein is retinol-binding protein, whose function
+is to bind vitamin  A.  Display the structure, in file 
+
+	1RBP.pdb
+
+The structure can be described as a back-and-forth b-sheet, rolled
+into a sandwich.  The  following commands will display the fold:
+
+	wireframe off
+	set background [230,230,230]
+	select sheet
+	ribbons on
+	colour group
+	set bondmode and
+	hbonds 70
+	colour hbonds type
+	set hbonds backbone
+
+Describe the structure of the fold, with diagrams (Hint: start by
+looking at residues 22 to  106, and then add the rest of the chain in
+segments).Describe how the barrel is made up;  what shape is its
+cross-section? Draw the bound retinol molecule by giving the 
+commands:
+
+	select RTL
+
+Click 'Colours' then 'Shapely'
+Click 'Display' then 'Spacefill'
+
+Where does retinol bind with respect to the b-sheet?  Rotate the
+molecule so you have a  broadside view of the retinol.  Give the
+following commands to see how retinol is bound:
+
+	select all
+
+Click 'Display' then 'Wireframe'
+Click 'Colours' then 'Shapely'
+Click 'Display' then 'Spacefill'
+	slab 55  [you may need a slightly different value]
+Click 'Options' then 'Hetero'
+Give the following commands:
+	select amino
+Click 'Colours' then 'Shapely'
+Click 'Display' then 'Spacefill'
+	slab 55  [you may need a slightly different value]
+	select RTL
+	spacefill on
+
+Which parts of the protein are in contact with retinol? How do you
+think the retinol gets  into its hole?
+
+
+6. Alpha/beta proteins: TIM and flavodoxin
+
+The final pair of proteins are a/b proteins, in which the secondary
+structural elements are  alternating helices and strands of
+beta-sheet.  Display triosephosphate isomerase, in the  file 1TIM.pdb. 
+Display the backbone of one subunit ('select *A') in group colours.  
+Rotate the molecule to see that it is a drum of alternating a-helices
+and strands of b-sheet.   These elements are in strict sequence along
+the chain, and should make a clockwise turn  from N-erminus to
+C-terminus.  Display the molecule as spheres to see the overall shape. 
+Go back to a backbone drawing, and then
+
+	select Ile or Val or Leu
+
+and display spheres; observe that the branched-chain hydrophobic
+residues provide the  packing between the helixes and the sheet.
+Repeat with
+
+	select hydrophobic
+
+to see how the rest of the core of the molecule is made up.  Go back
+to a backbone  drawing and rotate through 90  about the y-axis.  From
+the side view of the barrel, note  the direction of the strands and
+the helices with respect to the axis of the barrel. Note that  the
+loops are smaller and tighter at the right hand end of the molecule
+(the end you were  looking at), giving an overall shape of a truncated
+cone.  
+
+The active site is at the other end of the molecule, built from the
+longer loops (which are  presumably not so essential to maintaining
+the overall structure of the fold).  Rotate  through another 90 , and
+display the molecule as spheres, with shadows and with shapely 
+colours.  The active site is the central depression, and the
+catalytically active residues are  Glu-165, His-95 and Lys-13.  To
+describe the underlying fold, display residues 1 to 44 as  backbone in
+group colours.  Note the lengths of the a and b sections; as you go
+from N to  C terminus, do these elements describe a right-handed or a
+left-handed turn?.  
+
+Display the rest of the backbone (thinner than this part).  Sketch the
+way in which  successive b-a-b units are assembled into the complete
+barrel.
+
+Finally, display flavodoxin in the file 4FXN.pdb.  Describe the
+overall structure; display  a b-a-b unit  (e.g. residues 80-120). What
+is the handedness (=left- or right-hand turn,  going from N to C) of
+this unit?  
+
+Display the complete molecule and note the angle made by successive
+strands of the sheet  to each other and to axes of the helixes. Draw a
+diagram to show how the b-a-b units are  connected together. What is
+the order of strands in the sheet?  Note that the longer loops  are at
+the C-terminal ends of the beta strands.  
+
+	select FMN
+	spacefill on
+
+to see the binding site of the dinucleotide co-enzyme.  Sketch the
+position of the binding  site with respect to the b-sheet. Which atoms
+and groups are involved in binding the  coenzyme? 
+
+
+7. Open-ended exercise on DNA binding protein.
+
+The file  2CRO.pdb  contains the structure of a DNA-binding protein,
+and 3CRO.pdb  a  proposed model of the way it binds to DNA. Use the
+facilities of RasMol to describe the  folded structure of the protein,
+and the way it binds to DNA. 
+
+This protein binds to a specific sequence of bases. How might it
+recognise where to bind?  The interaction between protein and DNA is
+best seen by displaying the DNA as  wireframe, one subunit of the the
+protein as backbone, and the other as spheres. Ask a  demonstrator if
+you need help with this.
+
+
+
+===== end of tutorial =======

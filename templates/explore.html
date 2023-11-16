@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Explore Files</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="I don't really know what this search box is for" aria-label="Search for files" aria-describedby="button-search">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="button-search">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4">
+                <!-- Scope AI Suggestions -->
+                <div class="mb-3">
+                    <h5>Scope AI says...</h5>
+                    <div>
+                    <p>
+                        {{ai_response}}
+                    </p>
+                </div>
+                </div>
+                <!-- Follow Up Questions -->
+                <div>
+                    <h5>Follow up...</h5>
+                    <form id="question-form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="question-input" placeholder="Type your question">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Ask</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <h5>Graph View</h5>
+                <img id="graph-view" class="border" style="height: 300px;width:730px;" src="/static/graph.png"></img>
+                
+                <h5 class="mt-3">Explorer</h5>
+                <div id="file-explorer">
+                    <p>{{ filename }}</p>
+                    <p id="file_description">{{ file_description }}</p>
+                    <!-- Additional file information and actions could be added here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('question-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevents the default form submission action
+            var question = document.getElementById('question-input').value; // Gets the question from the input field
+            var fileDescription = document.getElementById('file_description').textContent; // Gets the text content of the <p> element
+
+            var url = '?prompt=' + encodeURIComponent(question) + '&file_description=' + encodeURIComponent(fileDescription); // Constructs the URL with both parameters
+            window.location.href = url;
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.7.9/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

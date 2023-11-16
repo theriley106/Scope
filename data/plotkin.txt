@@ -1,0 +1,17 @@
+Speaker: Steve Plotkin, UBC Physics
+
+Title: How does a protein fold? The effects of structure and many body 
+interactions.
+
+Abstract: The theory for how a protein folds up to a biologically
+functional structure has occupied researchers for the last few
+decades. The difficulties stem from an incomplete knowledge of an
+accurate Hamiltonian, as well as non-trivial aspects of polymer
+physics that complicate the kinetics of folding. Here will give a
+fairly long introduction to some of the central issues in protein
+folding, and then go on to describe some recent results showing that
+relaxation rates increase significantly as the folding mechanism
+becomes increasingly heterogeneous. Time permitting, I will discuss
+the role of many-body interactions in the Hamiltonian, and show how
+accounting for them is essential for predicting how a protein folds
+up.
