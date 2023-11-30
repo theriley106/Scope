@@ -19,13 +19,110 @@
                     <img alt="Logo" src="/static/logo.png" style="height:40px; width:40px" />
                 </div>
                 <div class="nav flex-column" style="padding-top: 100px">
-                    <a href="#" class="sidebar-icon text-white"><i class="fas fa-bars"></i></a>
+                    <a href="#" class="sidebar-icon text-white" data-bs-toggle="modal" data-bs-target="#uploadModal"><i class="fas fa-upload"></i></a>
                     <a href="#" class="sidebar-icon text-white"><i class="fas fa-search"></i></a>
                     <a href="#" class="sidebar-icon text-white"><i class="fas fa-user-friends"></i></a>
                     <a href="#" class="sidebar-icon text-white"><i class="fas fa-sync-alt"></i></a>
                     <a href="#" class="sidebar-icon text-white"><i class="fas fa-cog"></i></a>
                 </div>
             </div>
+
+            <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="uploadModalLabel">File Upload</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Drag and Drop Area -->
+                            <form id="fileUploadForm">
+                                <input type="file" id="fileInput" hidden accept="*/*" />
+                                <div id="dropArea" class="border p-3 text-center" style="border-radius: 10px; border-style: dashed; cursor: pointer;">
+                                    <p>Drag and drop a file here or <span class="text-primary" style="text-decoration: underline;">click to select a file</span></p>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="uploadButton">Upload</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                
+                $(document).ready(function() {
+    $('#dropArea').on('dragover', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        $(this).addClass('active');
+    }).on('dragleave', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        $(this).removeClass('active');
+    }).on('drop', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        $(this).removeClass('active');
+
+        var files = event.originalEvent.dataTransfer.files;
+        if (files.length > 0) {
+            var file = files[0]; // Only consider the first file
+            $('#fileInput').prop('files', createFileList([file]));
+            updateDropAreaWithFile(file);
+        }
+    });
+
+    // Upload button click
+    $('#uploadButton').on('click', function() {
+        var formData = new FormData();
+        formData.append('file', $('#fileInput')[0].files[0]); // Append the file
+
+        $.ajax({
+            url: '/upload',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                alert('File uploaded successfully!');
+                $('#uploadModal').modal('hide');
+            },
+            error: function(response) {
+                alert('Error uploading file.');
+            }
+        });
+    });
+});
+
+function createFileList(files) {
+    var dataTransfer = new DataTransfer();
+    files.forEach(file => dataTransfer.items.add(file));
+    return dataTransfer.files;
+}
+
+function updateDropAreaWithFile(file) {
+    if (file) {
+        $('#dropArea').text('File selected: ' + file.name);
+    }
+}
+
+// Trigger file selection when drop area is clicked
+$('#dropArea').on('click', function() {
+    $('#fileInput').click();
+});
+
+// Update drop area when file is selected using file input
+$('#fileInput').on('change', function(event) {
+    var file = event.target.files[0];
+    if (file) {
+        updateDropAreaWithFile(file);
+    }
+});
+
+            </script>
 
             <!-- Main content -->
             <div class="col py-5 main-content">

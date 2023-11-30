@@ -5,11 +5,34 @@ import random
 import glob
 import os
 import ai
+from werkzeug.utils import secure_filename
+import os
+
 
 app = Flask(__name__, static_url_path='/static/')
 images = ["dropbox.png", "google.png", "gmail.png"]
 DEFAULT_QUESTION = '''Begin by briefly describing what you are and what you are tasked to do. After this, print out the string "<NEXTPART>", 
 and then provide a quick summarization about the contents of this file without indicating that you're doing going to provide a summarization.'''
+
+
+data_folder = 'data'
+os.makedirs(data_folder, exist_ok=True)
+
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    if 'file' not in request.files:
+        return 'No file part', 400
+
+    file = request.files['file']
+    
+    if file.filename == '':
+        return 'No selected file', 400
+
+    if file:
+        filename = secure_filename(file.filename)
+        if os.path.exists(os.path.join(data_folder, filename)) == False:
+            file.save(os.path.join(data_folder, filename))
+        return 'File uploaded successfully', 200
 
 def generate_google_search_result_from_term(term):
     url = f"https://www.google.com/search?q={term.replace(' ', '+')}"
@@ -26,7 +49,7 @@ def generate_wikipedia_result_from_term(term):
 
 # This is just mocked out
 def find_files_from_term(term):
-    values = sorted(list(glob.glob("data/*")))
+    values = sorted(list(glob.glob("data/*.txt")))
     # This looks better I think when we shuffle them
     # random.shuffle(values)
     return values
