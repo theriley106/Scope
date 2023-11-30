@@ -1,0 +1,44 @@
+<div class="search-container mb-5">
+    <div class="search-bar" style="position: relative;">
+      <input type="text" id="autocomplete" class="form-control" placeholder="Search..." oninput="handleAutocomplete(this.value)">
+<div id="autocomplete-results" class="autocomplete-results"></div>
+    </div>
+  </div>
+
+  <script>
+    function handleAutocomplete(searchTerm) {
+      if (searchTerm.length === 0) {
+        $('#autocomplete-results').empty();
+        return;
+      }
+      
+      $.ajax({
+        url: '/autocomplete',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ term: searchTerm }),
+        success: function(response) {
+          $('#autocomplete-results').empty();
+          
+          response.results.forEach(function(item) {
+            $('#autocomplete-results').append(
+              `<a href="${item.link}"><div class="result-item">
+                <img src="${item.image}" alt="result image">
+                <span>${item.content}</span>
+              </div></a>`
+            );
+          });
+        },
+        error: function(xhr, status, error) {
+          console.error("Autocomplete error:", status, error);
+          $('#autocomplete-results').empty();
+        }
+      });
+    }
+  
+    $(document).on('click', function (e) {
+      if (!$(e.target).closest('#autocomplete').length) {
+        $('#autocomplete-results').empty();
+      }
+    });
+  </script>
