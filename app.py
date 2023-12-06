@@ -89,6 +89,10 @@ def autocomplete():
 def index():
     return render_template("index.html")
 
+@app.route('/graph', methods=['GET'])
+def graph():
+    return render_template("graph.html", dataValues=[{'label': 'data.csv', 'icon': 'excel.png'}, {'label': 'image.png', 'icon': 'excel.png'}])
+
 @app.route('/explore/<filename>', methods=['GET'])
 def explore(filename):
     if os.path.exists(f"data/{filename}") == False:

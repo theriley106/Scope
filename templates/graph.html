@@ -1,0 +1,117 @@
+
+        
+    <script>
+        const ctx = document.getElementById('networkGraph').getContext('2d');
+
+        // Function to generate random coordinates
+        function randomCoordinate(max) {
+            return Math.floor(Math.random() * max) + 30;
+        }
+
+        // Function to create a dataset of nodes
+        function createNodes(dataValues) {
+            const nodes = [];
+            dataValues.forEach(item => {
+                for (let i = 0; i < 3; i++) { // Each node appears three times
+                    nodes.push({
+                        x: randomCoordinate(100),
+                        y: randomCoordinate(100),
+                        r: 10,
+                        label: item.label,
+                        pointStyle: item.icon,
+                    });
+                }
+            });
+            return nodes;
+        }
+
+        // Passed dataValues from Jinja
+        const dataValues = [{'label': 'data.csv', 'icon': 'excel.png'}, {'label': 'image.png', 'icon': 'excel.png'}, {'label': 'data.csv', 'icon': 'excel.png'}, {'label': 'image.png', 'icon': 'excel.png'}, {'label': 'data.csv', 'icon': 'excel.png'}];
+        
+
+        let nodes = createNodes(dataValues);
+        var values = ['/static/excel.png', '/static/gmail.png', '/static/dropbox.png', '/static/file_icon.jpeg']
+        // Create chart
+        function getImage(){
+            
+            index = Math.floor(Math.random() * values.length);
+            
+            yourImage7 = new Image()
+            yourImage7.src = values[index];
+            yourImage7.width = 25;   // Set the width to 10 pixels
+            yourImage7.height = 25;
+            return yourImage7;
+
+        }
+        var temp = []
+        for (let i=0; i<dataValues.length; i++){
+            temp.push(getImage());
+        }
+        
+        let chart = new Chart(ctx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Graph View',
+                    data: nodes,
+                    borderColor: 'black',
+                    borderWidth: 3,
+                    pointStyle: temp,
+                    showLine: true
+                }]
+            },
+            options: {
+                legend: {
+            display: false
+         },
+         tooltips: {
+            enabled: false
+         },
+                responsive: true,
+    maintainAspectRatio: false,
+                scales: {
+                    xAxes: [{
+            Lines: {
+                drawOnChartArea: false,
+                drawBorder: false,
+            }
+        }],
+        yAxes: [{
+            Lines: {
+                drawOnChartArea: false,
+                drawBorder: false,
+            }
+        }],
+                    x: {
+                        type: 'linear',
+                        position: 'bottom',
+                        display: false,
+                    },
+                    y: {
+                        type: 'linear',
+                        position: 'left',
+                        display: false,
+                    }
+                },
+                plugins: {
+                    legend: {
+                display: false
+            },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.raw.label;
+                            }
+                        }
+                    },
+                }}
+        });
+
+        // Function to shuffle nodes
+        function shuffleNodes() {
+            chart.data.datasets[0].data = createNodes(dataValues);
+            chart.update();
+        }
+
+        document.getElementById('shuffleButton').addEventListener('click', shuffleNodes);
+    </script>
