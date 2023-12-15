@@ -88,6 +88,38 @@ def autocomplete():
 @app.route('/', methods=['GET'])
 def index():
     return render_template("index.html")
+import random
+file_cache = {}
+def get_icon_for_filename(filename):
+    typez = filename.split(".")[-1]
+    if typez not in file_cache:
+        if os.path.exists(f"static/32/{typez}.png"):
+            vv = f"/static/32/{typez}.png"
+        else:
+            vv = "/" + random.choice(list(glob.glob("static/32/*.png")))
+        file_cache[typez] = vv
+    return file_cache[typez]
+
+def get_random_file_list(filenamez=None, count=10):
+    values = ['/static/excel.png', '/static/gmail.png', '/static/dropbox.png', '/static/file_icon.jpeg']
+    xx = []
+    files = [x for x in list(glob.glob("data/*")) if x != None and x.endswith(".png") == False and x.endswith(".jpeg") == False and x.endswith(".jpg") == False]
+    r = None
+    for z in files:
+        if z.endswith(filenamez):
+            r = z
+            break
+    xxr = [x for x in files[:count] if x.endswith(filenamez) == False] + [r]
+    
+    for filename in xxr:
+        # input(filename)
+        if filename.endswith(filenamez):
+            xx.append({'icon': get_icon_for_filename(filename), 'filename': filename, 'primary': True})
+        else:
+            xx.append({'icon': get_icon_for_filename(filename), 'filename': filename, 'primary': False})
+    return xx
+
+
 
 @app.route('/graph', methods=['GET'])
 def graph():
@@ -131,7 +163,7 @@ def explore(filename):
         file_description = "File description failed to load"
 
         
-    return render_template("explore.html", filename=filename, file_contents=file_contents, ai_response=ai_response, file_description=file_description)
+    return render_template("explore.html", mappings=json.dumps(get_random_file_list(filename)), filename=filename, file_contents=file_contents, ai_response=ai_response, file_description=file_description)
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000)
