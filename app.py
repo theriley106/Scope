@@ -91,7 +91,14 @@ def index():
 
 @app.route('/graph', methods=['GET'])
 def graph():
-    return render_template("graph.html", dataValues=[{'label': 'data.csv', 'icon': 'excel.png'}, {'label': 'image.png', 'icon': 'excel.png'}])
+    return render_template("graph2.html", dataValues=[{'label': 'data.csv', 'icon': 'excel.png'}, {'label': 'image.png', 'icon': 'excel.png'}])
+import random
+@app.route('/randomExplore')
+def random_explore():
+    ll = [x['link'] for x in generate_file_explores_from_term("", count=50)]
+    print(ll)
+    return redirect(random.choice(ll), code=302)
+    return ""
 
 @app.route('/explore/<filename>', methods=['GET'])
 def explore(filename):
