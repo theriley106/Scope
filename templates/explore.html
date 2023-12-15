@@ -1,73 +1,26 @@
 {% include 'top.html' %}
          {% include 'search.html' %}
-
          <div class="row">
-            <div class="col-md-6">
-               <div class="max-w-2xl mx-auto my-8">
-                  <div class="p-6 bg-white rounded-lg shadow-lg">
-                     <h5>Changed AI...</h5>
-                     <div>
-                        <p>
-                           {{ai_response}}
-                        </p>
-                     </div>
-                  </div>
+            <div class="col-md-4">
+               <div class="mb-3">
+                  <h5>Scope AI says...</h5>
                   <div>
-
-                        <div class="flex items-center px-4 py-2 bg-white rounded-full shadow-lg">
-                            <button class="flex items-center justify-center w-10 h-10 mr-2 text-lg font-semibold text-pink-500 bg-white rounded-full shadow-lg">CL</button>
-                            <input type="text" placeholder="Follow up..." class="text-sm placeholder-gray-400 bg-white outline-none w-80">
-                            <button class="ml-2 text-gray-400">
-                                <i class="fas fa-ellipsis-h"></i>
-                            </button>
-                        </div>
-
-                     <!-- follow up section goes here -->
-                     
-
-
-                     <!-- <h5>Follow up...</h5>
-                     <form id="question-form">
-                        <div class="form-group">
-                           <input type="text" class="form-control" id="question-input" placeholder="Type your question">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Ask</button>
-                     </form> -->
-
-
-
+                     <p>
+                        {{ai_response}}
+                     </p>
                   </div>
                </div>
-            </div>
-            <div class="col-md-6">
-               <div class="max-w-2xl mx-auto my-8">
-                  <div class="p-6 bg-white rounded-lg shadow-lg">
-                     <div class="p-6 bg-white rounded-lg shadow-lg">
-                        <!-- First element with its shell -->
-                        <h1 class="mb-4 text-2xl font-bold">Dropsiphilia lab cluster</h1>
-                        <div class="flex items-center justify-center">
-                           <img src="https://placehold.co/634x748" alt="A visual cluster diagram showing various file types such as JPG, Jupyter notebooks, PowerPoint, and Excel, all connected to each other, representing the Drosiphilia lab cluster." class="h-auto max-w-full">
-                        </div>
+               <div>
+                  <h5>Follow up...</h5>
+                  <form id="question-form">
+                     <div class="form-group">
+                        <input type="text" class="form-control" id="question-input" placeholder="Type your question">
                      </div>
-                     <div class="p-6 mt-4 bg-white rounded-lg shadow-lg">
-                        <!-- Second element with its shell -->
-                        <h2 class="mb-2 text-xl font-bold">Explorer</h2>
-                        <div class="flex items-center">
-                           <div class="w-6 h-6 mr-2 bg-green-500"></div>
-                           <p class="text-sm">
-                              <strong>lab1_results.xls</strong> is an Excel file showcasing the results of the Drosiphilia lab. It was created on October 12th by Jay Patel
-                           </p>
-                        </div>
-                     </div>
-                  </div>
-              </div>
+                     <button type="submit" class="btn btn-primary">Ask</button>
+                  </form>
+               </div>
             </div>
-         </div>
-
-            
-
-
-            <!-- <div class="col-md-8">
+            <div class="col-md-8">
                <h5>Graph View</h5>
                <div id="graph-view" class="border" style="height: 300px;width:730px;"><canvas id="networkGraph"></canvas>{% include 'graph.html'%}</div>
                <h5 class="mt-3">Explorer</h5>
@@ -75,10 +28,10 @@
                   <p>{{ filename }}</p>
                   <p id="file_description">{{ file_description }}</p>
                </div>
-            </div> -->
-
-
-      <!-- <script>
+            </div>
+         </div>
+      </div>
+      <script>
          document.getElementById('question-form').addEventListener('submit', function(event) {
              event.preventDefault();
              var question = document.getElementById('question-input').value;
@@ -87,7 +40,7 @@
              var url = '?prompt=' + encodeURIComponent(question) + '&file_description=' + encodeURIComponent(fileDescription);
              window.location.href = url;
          });
-      </script> -->
+      </script>
 
 
 

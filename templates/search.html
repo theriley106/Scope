@@ -1,27 +1,9 @@
-<div class="mb-5 search-container">
-  <div class="flex items-center overflow-hidden bg-white rounded-full shadow-md">
-    <button class="flex items-center justify-center px-4 border-r">
-        <i class="text-blue-500 fas fa-arrow-up"></i>
-    </button>
-    <input type="text" id="autocomplete" class="form-control" placeholder="Search..." oninput="handleAutocomplete(this.value)">
-    <button class="flex items-center justify-center px-4">
-      <i class="text-gray-500 fas fa-search"></i>
-  </button>
+<div class="search-container mb-5">
+    <div class="search-bar" style="position: relative;">
+      <input type="text" id="autocomplete" class="form-control" placeholder="Search..." oninput="handleAutocomplete(this.value)">
 <div id="autocomplete-results" class="autocomplete-results"></div>
+    </div>
   </div>
-</div>
-
-<!-- <div class="max-w-lg p-4 mx-auto">
-  <div class="flex items-center overflow-hidden bg-white rounded-full shadow-md">
-      <button class="flex items-center justify-center px-4 border-r">
-          <i class="text-blue-500 fas fa-arrow-up"></i>
-      </button>
-      <input type="text" class="w-full px-4 py-2" placeholder="nociceptive receptors in drosophila methods" value="nociceptive receptors in drosophila methods">
-      <button class="flex items-center justify-center px-4">
-          <i class="text-gray-500 fas fa-search"></i>
-      </button>
-  </div> -->
-
 
   <script>
     function handleAutocomplete(searchTerm) {
