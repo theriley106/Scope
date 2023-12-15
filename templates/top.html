@@ -10,6 +10,88 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+        #interaction .card {
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+            background-color: #fff;
+        }
+        #interaction .card-header {
+            background-color: #f8f9fa;
+            border-bottom: none;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            color: #ff6b81;
+            padding: 20px;
+        }
+        #interaction .card-body {
+            padding: 20px;
+        }
+        #interaction .card-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: #000;
+            margin-bottom: 10px;
+        }
+        #interaction .card-text {
+            font-size: 16px;
+            font-weight: 400;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        #interaction .btn-circle {
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            color: #fff;
+            background-color: #ff6b81;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    .modal-body .upload-title {
+            text-align: center;
+            font-size: 30px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        .modal-body .context-menu {
+            width: 240px;
+            background-color: #ffffff;
+            border-radius: 6px;
+            padding: 10px;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+            margin: auto;
+        }
+        .modal-body .context-menu-item {
+            padding: 8px 12px;
+            font-size: 14px;
+            color: #333;
+        }
+        .modal-body .context-menu-item:not(:last-child) {
+            border-bottom: 1px solid #eaeaea;
+        }
+        .modal-body .context-menu-item.highlight {
+            color: #007bff;
+        }
+        .modal-body .instruction-text {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .instruction-text .highlight {
+            color: #007bff;
+        }
+        .modal-body .placeholder-image {
+            display: block;
+            margin: 20px auto;
+        }
+</style>
 </head>
 <body>
     <div class="container-fluid h-100">
@@ -17,14 +99,15 @@
             <!-- Sidebar -->
             <div class="col-auto sidebar d-flex flex-column align-items-stretch py-4">
                 <div class="">
-                    <img alt="Logo" src="/static/logo.png" style="height:40px; width:40px" />
+                    <a href="/"><img alt="Logo" src="/static/logo.png" style="height:40px; width:40px" /></a>
                 </div>
                 <div class="nav flex-column" style="padding-top: 100px">
                     <a href="#" class="sidebar-icon text-white" data-bs-toggle="modal" data-bs-target="#uploadModal"><i class="fas fa-upload"></i></a>
-                    <a href="#" class="sidebar-icon text-white"><i class="fas fa-search"></i></a>
                     <a href="#" class="sidebar-icon text-white"><i class="fas fa-user-friends"></i></a>
                     <a href="#" class="sidebar-icon text-white"><i class="fas fa-sync-alt"></i></a>
                     <a href="#" class="sidebar-icon text-white"><i class="fas fa-cog"></i></a>
+                    <a href="#" class="sidebar-icon text-white" style="margin-top: 35vh;"><img src="/static/profile.jpeg" class="rounded-circle" alt="img"></a>
+                    
                 </div>
             </div>
 
@@ -36,17 +119,20 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <!-- Drag and Drop Area -->
-                            <form id="fileUploadForm">
-                                <input type="file" id="fileInput" hidden accept="*/*" />
-                                <div id="dropArea" class="border p-3 text-center" style="border-radius: 10px; border-style: dashed; cursor: pointer;">
-                                    <p>Drag and drop a file here or <span class="text-primary" style="text-decoration: underline;">click to select a file</span></p>
+                            <div class="container">
+                                <div class="upload-title">
+                                 Upload through File Sync
                                 </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" id="uploadButton">Upload</button>
+                                <img alt="Placeholder image for context menu interaction" class="placeholder-image" height="150" src="/static/upload.png" width="200"/>
+                                
+                                <p class="instruction-text">
+                                 Right click any relevant local folder or file (i.e. "lab 2") and select
+                                 <span class="highlight">
+                                  "Scope folder sync"
+                                 </span>
+                                 to upload all contents to Scope.
+                                </p>
+                               </div>
                         </div>
                     </div>
                 </div>

@@ -5,7 +5,7 @@
     <!--<script src="../../dist/force-graph.js"></script>-->
   </head>
   
-    <div style="height: 300px;width:730px;" id="graph"></div>
+    <div style="height: 390px;width:500px;" id="graph"></div>
   
     <script>
     
@@ -30,7 +30,7 @@
         var myValue;
         var xO;
         var yO;
-  
+        var clicked;
       // Random connected graph
       const gData = {
         nodes: imgs.map((img, id, link) => ({ id, img, link })),
@@ -45,8 +45,8 @@
       const elem = document.getElementById('graph');
       const Graph = ForceGraph()
         (elem)
-        .height(300)
-        .width(730)
+        .height(390)
+        .width(540)
         .nodeId('id')
         .linkWidth(3)
         .onNodeHover((node, ctx) => {
@@ -88,6 +88,7 @@
           ctx.fillRect(node.x - size / 2, node.y - size / 2, size, size); // draw square as pointer trap
         })
         .onNodeClick(node => {
+            clicked = true;
             // Center/zoom on node
             Graph.centerAt(node.x, node.y, 1000);
             Graph.zoom(8, 2000);
@@ -98,15 +99,21 @@
           if (typeof myValue === 'undefined' && typeof xO !== 'undefined'){
 
             myValue = "working";
-            Graph.zoomToFit(0, 30, (node) => true);
             Graph.centerAt(xO, yO); 
+            
 
           }
+          
+          if (typeof clicked === 'undefined'){
 
-          Graph.zoomToFit(0, 30, (node) => true);
+            Graph.zoomToFit(0, 30, (node) => true);
+            // 
+          }
         })
         .graphData(gData);
+        if (typeof clicked === 'undefined'){
 
-        
+          Graph.zoomToFit(0, 30, (node) => true);
+        }
         
     </script>

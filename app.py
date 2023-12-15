@@ -12,7 +12,7 @@ import os
 app = Flask(__name__, static_url_path='/static/')
 images = ["dropbox.png", "google.png", "gmail.png"]
 DEFAULT_QUESTION = '''Begin by briefly describing what you are and what you are tasked to do. After this, print out the string "<NEXTPART>", 
-and then provide a quick summarization about the contents of this file without indicating that you're doing going to provide a summarization.'''
+and then provide a quick summarization about the contents of this file starting with "is a file..." without indicating that you're doing going to provide a summarization. Follow this by printing the string "<AFTERSUM>" and then directly print a 2-5 word description of the file without any context or punctuation (strip all punctuation).'''
 
 
 data_folder = 'data'
@@ -49,9 +49,9 @@ def generate_wikipedia_result_from_term(term):
 
 # This is just mocked out
 def find_files_from_term(term):
-    values = sorted(list(glob.glob("data/*.txt")))
+    values = [x for x in list(glob.glob("data/*")) if x != None and x.endswith(".png") == False and x.endswith(".jpeg") == False and x.endswith(".jpg") == False]
     # This looks better I think when we shuffle them
-    # random.shuffle(values)
+    random.shuffle(values)
     return values
 
 def generate_file_explores_from_term(term, count=1):
@@ -61,7 +61,7 @@ def generate_file_explores_from_term(term, count=1):
     for i in range(min(count, len(files))):
         filename = files[i]
         link = "/explore/" + filename.split("/")[-1]
-        results.append({"image": "/static/file_icon.jpeg", "content": filename, "link": link})
+        results.append({"image": get_icon_for_filename(filename), "content": filename, "link": link})
     return results
 
 def generate_response(term):
@@ -78,10 +78,10 @@ def autocomplete():
     results.append(generate_wikipedia_result_from_term(search_term))
     results.append(generate_google_scholar_result_from_term(search_term))
     results.append(generate_google_search_result_from_term(search_term))
-    results += generate_file_explores_from_term(search_term, 3)
+    results += generate_file_explores_from_term(search_term, 5)
 
-    for val in [generate_response(search_term) for i in range(10)]:
-        results.append(val)
+    #for val in [generate_response(search_term) for i in range(10)]:
+    #    results.append(val)
     
     return jsonify({"results": results})
 
@@ -144,13 +144,16 @@ def explore(filename):
 
     question = request.args.get('prompt', DEFAULT_QUESTION)
     file_description = request.args.get('file_description', '')
+    short_description =  request.args.get('short_description', '')
     
     for i in range(3):
 
         # This does the chat gpt integration
         ai_response = ai.get_response_from_question(file_contents, question=question)
-        if len(file_description) == 0 and '<NEXTPART>' in ai_response:
+        if len(file_description) == 0 and '<NEXTPART>' in ai_response and "<AFTERSUM>" in ai_response:
             ai_response, file_description = ai_response.split("<NEXTPART>")
+            file_description, short_description = file_description.split("<AFTERSUM>")
+            short_description = short_description.strip().replace(".", "")
             ai_response = ai_response.strip()
             file_description = file_description.strip()
             break
@@ -163,7 +166,7 @@ def explore(filename):
         file_description = "File description failed to load"
 
         
-    return render_template("explore.html", mappings=json.dumps(get_random_file_list(filename)), filename=filename, file_contents=file_contents, ai_response=ai_response, file_description=file_description)
+    return render_template("explore.html", mappings=json.dumps(get_random_file_list(filename)), filename=filename, file_contents=file_contents, ai_response=ai_response, file_description=file_description, short_description=short_description)
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000)
