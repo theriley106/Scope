@@ -5,7 +5,7 @@
     <!--<script src="../../dist/force-graph.js"></script>-->
   </head>
   
-    <div style="height: 390px;width:500px;" id="graph"></div>
+    <div style="height: 200%;width:100%;" id="graph"></div>
   
     <script>
     
@@ -45,8 +45,8 @@
       const elem = document.getElementById('graph');
       const Graph = ForceGraph()
         (elem)
-        .height(390)
-        .width(540)
+        .height(elem.clientHeight * 0.4)
+        .width(elem.clientWidth * 0.4)
         .nodeId('id')
         .linkWidth(3)
         .onNodeHover((node, ctx) => {
@@ -115,5 +115,20 @@
 
           Graph.zoomToFit(0, 30, (node) => true);
         }
-        
+
+        function resizeGraph() {
+          const minWidth = 200; // Set the minimum width for the graph
+          let width = Math.max(elem.clientWidth * 0.9, minWidth);
+          let height = elem.clientHeight;
+
+          Graph.width(width).height(height);
+        }
+
+        window.addEventListener('resize', () => {
+          Graph.width(null) // Reset the graph's dimensions
+          resizeGraph(); // Call the resizeGraph function to recalculate the dimensions
+        });
+
+        // Initial call to set the graph dimensions
+        resizeGraph();
     </script>
