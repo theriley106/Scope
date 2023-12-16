@@ -1,102 +1,54 @@
 {% include 'top.html' %}
          {% include 'search.html' %}
-         <style>
-    #file-explorer .card {
-      border-radius: 12px;
-      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-      transition: 0.3s;
-      width: 40%;
-      margin: auto;
-      margin-top: 50px;
-      background-color: #ffffff;
-    }
-    #file-explorer .card-body {
-      padding: 16px;
-      position: relative;
-    }
-    #file-explorer .card-title {
-      font-size: 24px;
-      margin-bottom: 5px;
-    }
-    #file-explorer .file-name {
-      color: #5e5e5e;
-      font-weight: bold;
-    }
-    #file-explorer .file-description {
-      color: #6c757d;
-      font-size: 14px;
-    }
-    #file-explorer .file-icon {
-      background-color: #4CAF50;
-      width: 16px;
-      height: 16px;
-      display: inline-block;
-      vertical-align: middle;
-      margin-right: 5px;
-    }
-    #file-explorer .file-icon-bar {
-      background-color: #4CAF50;
-      width: 8px;
-      height: 100%;
-      display: block;
-      position: absolute;
-      left: 0;
-      top: 0;
-      border-top-left-radius: 12px;
-      border-bottom-left-radius: 12px;
-    }
-    #file-explorer .created-info {
-      color: #6c757d;
-      font-size: 14px;
-      margin-top: 8px;
-    }
-    #file-explorer .created-info span {
-      font-weight: bold;
-    }
-         </style>
-         <div class="row">
-            <div id="interaction" class="col-md-4">
-               <div class="container">
-                  <div class="card">
-                      <div class="card-header">
-                          <i class="fas fa-atom"></i> Scope AI says...
-                      </div>
-                      <div class="card-body">
-                          <p class="card-text">{{ai_response}}</p>
-                      </div>
-                  </div>
-                  <div class="input-group mb-3">
-                        <form id="question-form">
-                           <div class="form-group">
-                              <input type="text" class="form-control" id="question-input" placeholder="Type your question">
-                           </div>
-                           <button type="submit" class="btn btn-primary">Ask</button>
-                        </form></div>
-              </div>
-            </div>
-            <div class="col-md-8">
-               <div class="card">
-               <div class="card-body">
-                  <center><h5  id="short_description">{{short_description}}</h5></center>
-                  <div id="graph-view">{% include 'graph2.html'%}</div>
-                  <br>
-                  <p></p>
-                  <br>
-                  <div id="file-explorer" class="card">
-                     <div class="file-icon-bar"></div>
-                     <div class="card-body">
-                       <h5 class="card-title">Explorer</h5>
-                       <p>
-                         <span class="file-name">{{ filename }}</span><span id="file_description"> {{ file_description }}</span><span> It was created on 
-                         <span class="created-info">October 12th by <span>Jay Patel</span></span>
-                       </p>
+
+         <div class="container-fluid" style="display: flex;">
+            <div class="row">
+               <!-- left side element -->
+               <div id="interaction" style="flex: 1;">
+                  <!-- <div class="container"> -->
+                     <div class="card">
+                        <div class="card-header">
+                           <i class="fas fa-atom"></i> Scope AI says...
+                        </div>
+                        <div class="card-body">
+                           <p class="card-text">{{ai_response}}</p>
+                        </div>
                      </div>
-                   </div>
+                     <div class="mb-3 input-group">
+                           <form id="question-form">
+                              <div class="form-group">
+                                 <input type="text" class="form-control" id="question-input" placeholder="Type your question">
+                              </div>
+                              <button type="submit" class="btn btn-primary">Ask</button>
+                           </form></div>
+               <!-- </div> -->
                </div>
+               <!-- right side element -->
+               <div id="exploregraph" style="flex: 2;">
+                  <div class="card">
+                     <div class="card-header">
+                        <center><h5  id="short_description">{{short_description}}</h5></center>
+                     </div>
+                  <div class="card-body">
+                     <div id="graph-view" class="card">{% include 'graph2.html'%}</div>
+                     <p></p>
+                     <br>
+                     <div id="file-explorer" class="card">
+                        <div class="file-icon-bar"></div>
+                        <div class="card-body">
+                        <h5 class="card-title">Explorer</h5>
+                        <p>
+                           <span class="file-name">{{ filename }}</span><span id="file_description"> {{ file_description }}</span><span> It was created on 
+                           <span class="created-info">October 12th by <span>Jay Patel</span></span>
+                        </p>
+                        </div>
+                     </div>
+                  </div>
                </div>
-               
+                  
             </div>
          </div>
+      </div>
       </div>
       <script>
          document.getElementById('question-form').addEventListener('submit', function(event) {
