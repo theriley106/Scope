@@ -3,7 +3,7 @@ from openai import OpenAI
 
 API_KEY = os.environ.get('OPENAI_API_KEY')
 if API_KEY == None:
-    raise Exception("Text Chris to get the open api key if you're trying to run this locally")
+    API_KEY = input("Input the API key in the key.txt file from courseworks to run this locally: ").strip()
 client = OpenAI(api_key=API_KEY)
 
 

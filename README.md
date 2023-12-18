@@ -8,6 +8,7 @@ Visit our live demo at [www.scopeapp.dev](https://www.scopeapp.dev).
 - **AI Integration:** [OpenAI API](https://platform.openai.com/docs/api-reference)
 - **Hosting:** [Render](https://render.com/)
 - **Domain and Routing:** [CloudFlare](https://www.cloudflare.com/)
+- **Third Party Libraries:** [ForceGraph](https://github.com/vasturiano/force-graph)
 
 ## Access Instructions
 
